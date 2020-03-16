@@ -1,16 +1,58 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'edu.sc.seis.gradle:launch4j:2.4.3'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
+    }
+}
 plugins {
     id 'java'
 }
 
 group 'tech.mateuszbaluch'
 version '1.0-SNAPSHOT'
+apply plugin: 'application'
+apply plugin: 'edu.sc.seis.launch4j'
+apply plugin: 'eu.appsatori.fatjar'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
+mainClassName = "tech.mateuszbaluch.minecraftsspw.launcher.Main"
+createExe.dependsOn fatJar
+
+fatJar {
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+}
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compile group: 'org.tukaani', name: 'xz', version: '1.8'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
 }
+
+launch4j {
+    mainClassName = "tech.mateuszbaluch.minecraftsspw.launcher.Main"
+    icon = "${projectDir}/favicon.ico"
+    dontWrapJar = false
+    jreMinVersion = '1.8.0_120'
+    messagesJreVersionError = "Nie posiadasz odpowiedniej wersji Javy. "
+    language = "POLISH"
+    outfile = 	project.name+'-'+project.version+'.exe'
+    outputDir = "libs"
+}
+

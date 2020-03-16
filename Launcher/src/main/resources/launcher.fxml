@@ -19,7 +19,7 @@
                <Font name="System Bold" size="18.0"/>
             </font>
          </Label>
-         <TextField layoutX="15.0" layoutY="52.0" prefHeight="37.0" prefWidth="397.0"/>
+         <TextField layoutX="15.0" layoutY="52.0" prefHeight="37.0" prefWidth="397.0" fx:id="nicknameField"/>
          <Label layoutX="15.0" layoutY="111.0" text="Pamięć RAM">
             <font>
                <Font name="System Bold" size="18.0"/>
@@ -27,7 +27,7 @@
          </Label>
          <Slider blockIncrement="1.0" layoutX="15.0" layoutY="138.0" majorTickUnit="1.0" max="8.0" min="1.0"
                  prefHeight="27.0" prefWidth="397.0" showTickLabels="true" showTickMarks="true"
-                 snapToTicks="true"/>
+                 snapToTicks="true" fx:id="ramSlider"/>
       </AnchorPane>
       <Button layoutY="224.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="USTAWIENIA"
               textFill="WHITE">
@@ -39,7 +39,7 @@
          </cursor>
       </Button>
       <Button layoutX="222.0" layoutY="224.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="GRAJ"
-              textFill="WHITE">
+              textFill="WHITE" onMouseClicked="#play">
          <font>
             <Font name="System Bold" size="12.0"/>
          </font>
@@ -49,15 +49,15 @@
       </Button>
    </AnchorPane>
    <AnchorPane fx:id="loadingPane" layoutX="202.0" layoutY="189.0" prefHeight="74.0" prefWidth="397.0" visible="false">
-      <Label layoutX="185.0" layoutY="40.0" text="Status" textFill="WHITE">
+      <Label layoutX="185.0" layoutY="40.0" text="Status" textFill="WHITE" fx:id="statusLabel">
          <font>
             <Font name="System Bold" size="12.0"/>
          </font>
       </Label>
-      <ProgressBar layoutX="22.0" layoutY="18.0" prefHeight="18.0" prefWidth="353.0"/>
+      <ProgressBar layoutX="22.0" layoutY="18.0" prefHeight="18.0" prefWidth="353.0" fx:id="progressbar"/>
    </AnchorPane>
    <Label fx:id="authorLabel" layoutX="613.0" layoutY="412.0" text="Realizacja: Mateusz Bałuch" textFill="WHITE"
-          underline="true">
+          underline="true" onMouseClicked="#author">
       <font>
          <Font name="System Bold" size="12.0"/>
       </font>
