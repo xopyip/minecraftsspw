@@ -17,6 +17,10 @@ public class Controller implements Initializable {
     public AnchorPane container;
     @FXML
     public Label authorLabel;
+    @FXML
+    public AnchorPane controlsContainer;
+    @FXML
+    public AnchorPane loadingPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

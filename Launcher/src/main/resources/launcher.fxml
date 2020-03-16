@@ -6,49 +6,63 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="container" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.mateuszbaluch.minecraftsspw.launcher.Controller">
+<AnchorPane fx:id="container" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.mateuszbaluch.minecraftsspw.launcher.Controller">
 
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
-   <children>
-      <AnchorPane fx:id="controlsPane" layoutX="187.0" layoutY="95.0" prefHeight="200.0" prefWidth="426.0">
-         <children>
-            <Label layoutX="14.0" layoutY="25.0" text="Nickname">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField layoutX="15.0" layoutY="52.0" prefHeight="37.0" prefWidth="397.0" />
-            <Label layoutX="15.0" layoutY="111.0" text="Pamięć RAM">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Slider blockIncrement="1.0" layoutX="15.0" layoutY="138.0" majorTickUnit="1.0" max="8.0" min="1.0" prefHeight="27.0" prefWidth="397.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-         </children>
+   <stylesheets>
+      <URL value="@style.css"/>
+   </stylesheets>
+   <AnchorPane fx:id="controlsContainer" layoutX="187.0" layoutY="95.0">
+      <AnchorPane fx:id="controlsPane" prefHeight="200.0" prefWidth="426.0">
+         <Label layoutX="14.0" layoutY="25.0" text="Nickname">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+         </Label>
+         <TextField layoutX="15.0" layoutY="52.0" prefHeight="37.0" prefWidth="397.0"/>
+         <Label layoutX="15.0" layoutY="111.0" text="Pamięć RAM">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+         </Label>
+         <Slider blockIncrement="1.0" layoutX="15.0" layoutY="138.0" majorTickUnit="1.0" max="8.0" min="1.0"
+                 prefHeight="27.0" prefWidth="397.0" showTickLabels="true" showTickMarks="true"
+                 snapToTicks="true"/>
       </AnchorPane>
-      <Button layoutX="187.0" layoutY="319.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="USTAWIENIA" textFill="WHITE">
+      <Button layoutY="224.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="USTAWIENIA"
+              textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="12.0"/>
          </font>
          <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button layoutX="409.0" layoutY="319.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="GRAJ" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Label layoutX="613.0" layoutY="412.0" text="Realizacja: Mateusz Bałuch" textFill="WHITE" underline="true" fx:id="authorLabel">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="HAND"/>
          </cursor>
+      </Button>
+      <Button layoutX="222.0" layoutY="224.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="204.0" text="GRAJ"
+              textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND"/>
+         </cursor>
+      </Button>
+   </AnchorPane>
+   <AnchorPane fx:id="loadingPane" layoutX="202.0" layoutY="189.0" prefHeight="74.0" prefWidth="397.0" visible="false">
+      <Label layoutX="185.0" layoutY="40.0" text="Status" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
       </Label>
-   </children>
+      <ProgressBar layoutX="22.0" layoutY="18.0" prefHeight="18.0" prefWidth="353.0"/>
+   </AnchorPane>
+   <Label fx:id="authorLabel" layoutX="613.0" layoutY="412.0" text="Realizacja: Mateusz Bałuch" textFill="WHITE"
+          underline="true">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND"/>
+      </cursor>
+   </Label>
 </AnchorPane>
