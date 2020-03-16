@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import tech.mateuszbaluch.minecraftsspw.launcher.data.LauncherRepo;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,9 +42,19 @@ public class Controller implements Initializable {
     public ProgressBar progressbar;
     private LauncherRepo repo = null;
     private static final Gson GSON = new Gson();
+    public static Config CONFIG;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try (FileReader reader = new FileReader(Main.CONFIG_FILE)) {
+            CONFIG = GSON.fromJson(reader, Config.class);
+        } catch (IOException e) {
+            //sth went wrong (ex: file not exists) - create new config
+            CONFIG = new Config();
+        }
+        nicknameField.setText(CONFIG.getNickname());
+        ramSlider.setValue(CONFIG.getRam()/1024d);
 
         try {
             repo = GSON.fromJson(Unirest.get("http://minecraft.sspw.pl/repo.json").asString().getBody(), LauncherRepo.class);
@@ -62,7 +74,10 @@ public class Controller implements Initializable {
         controlsContainer.setVisible(false);
         loadingPane.setVisible(true);
         progressbar.setProgress(-1);
-        MinecraftLauncher.launch(repo, nicknameField.getText(), (int) (ramSlider.getValue() * 1024),
+        CONFIG.setRam( (int) (ramSlider.getValue() * 1024));
+        CONFIG.setNickname(nicknameField.getText());
+        CONFIG.save();
+        MinecraftLauncher.launch(repo, CONFIG,
                 (text, progress) -> Platform.runLater(() -> {
                     statusLabel.setText(text);
                     progressbar.setProgress(progress);

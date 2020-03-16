@@ -10,14 +10,13 @@ import tech.mateuszbaluch.minecraftsspw.launcher.data.LauncherRepo;
 @AllArgsConstructor
 public class MinecraftLauncher {
     private final LauncherRepo rpeo;
-    private final String nick;
-    private final int ram;
+    private final Config config;
     private final IProgressUpdate updateFunction;
     private final Runnable callback;
 
 
-    public static void launch(LauncherRepo rpeo, String nick, int ram, IProgressUpdate updateFunction, Runnable callback){
-        new MinecraftLauncher(rpeo, nick, ram, updateFunction, callback).run();
+    public static void launch(LauncherRepo rpeo, Config config, IProgressUpdate updateFunction, Runnable callback){
+        new MinecraftLauncher(rpeo, config, updateFunction, callback).run();
     }
 
     private void run() {
