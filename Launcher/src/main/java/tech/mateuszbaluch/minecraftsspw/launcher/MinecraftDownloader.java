@@ -1,11 +1,9 @@
 package tech.mateuszbaluch.minecraftsspw.launcher;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.scene.control.Alert;
 import lombok.AllArgsConstructor;
 import tech.mateuszbaluch.minecraftsspw.launcher.data.Assets;
 import tech.mateuszbaluch.minecraftsspw.launcher.data.LauncherRepo;
@@ -20,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor
-public class MinecraftLauncher {
+public class MinecraftDownloader {
     private final LauncherRepo repo;
     private final Config config;
     private final IProgressUpdate updateFunction;
@@ -30,7 +28,7 @@ public class MinecraftLauncher {
     public static void launch(LauncherRepo repo, Config config, IProgressUpdate updateFunction, Runnable callback) {
         Thread thread = new Thread(() -> {
             try {
-                new MinecraftLauncher(repo, config, updateFunction, callback).run();
+                new MinecraftDownloader(repo, config, updateFunction, callback).run();
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
@@ -113,9 +111,11 @@ public class MinecraftLauncher {
 
         updateFunction.update("Rozpoczynanie pobierania!", -1);
 
-        downloader.setOnFinishListener(() -> {
-            System.out.println("DONE");
-        });
+        final MinecraftRunner minecraftLauncher = new MinecraftRunner(forgeVersion, callback);
+        minecraftLauncher.setRam(config.getRam());
+        minecraftLauncher.setName(config.getNickname());
+        downloader.setOnFinishListener(minecraftLauncher::launch);
+        downloader.start();
         downloader.start();
 
     }

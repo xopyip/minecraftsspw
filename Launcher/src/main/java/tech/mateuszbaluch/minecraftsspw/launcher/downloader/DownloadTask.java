@@ -45,7 +45,7 @@ public class DownloadTask<T> {
                 ));
             }
             if(library.getNatives()!= null){
-                final String s = library.getNatives().get(Utils.getOperatingSystem());
+                final String s = library.getNatives().get(Utils.getOperatingSystem().getText());
                 if(s!=null){
                     artifact = library.getDownloads().getClassifiers().get(s);
                     tasks.add( new DownloadTask<>(

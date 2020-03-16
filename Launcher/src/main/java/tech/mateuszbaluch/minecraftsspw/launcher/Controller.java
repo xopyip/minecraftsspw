@@ -76,14 +76,14 @@ public class Controller implements Initializable {
         CONFIG.setRam( (int) (ramSlider.getValue() * 1024));
         CONFIG.setNickname(nicknameField.getText());
         CONFIG.save();
-        MinecraftLauncher.launch(repo, CONFIG,
+        MinecraftDownloader.launch(repo, CONFIG,
                 (text, progress) -> Platform.runLater(() -> {
                     statusLabel.setText(text);
                     progressbar.setProgress(progress);
                 }),
                 () -> Platform.runLater(() -> {
                     Stage stage = (Stage) progressbar.getScene().getWindow();
-                    stage.close();
+                    stage.hide();
                 })
         );
     }
