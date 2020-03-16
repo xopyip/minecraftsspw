@@ -1,0 +1,50 @@
+#container{
+    -fx-background-image: url('/bg.png');
+}
+
+#controlsPane{
+    -fx-background-color: rgba(255,255,255, 0.5);
+    -fx-border-color: #ffffff;
+    -fx-border-width: 5px;
+}
+
+TextField {
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0;
+}
+TextField:focused{
+    -fx-background-color: -fx-focus-color, -fx-background ;
+}
+
+Button{
+    -fx-background-color: rgba(255,255,255, 0.5);
+    -fx-border-color: #ffffff;
+    -fx-border-width: 5px;
+}
+Button:hover{
+    -fx-background-color: rgba(150,150,150, 0.5);
+    -fx-border-color: #bbbbbb;
+    -fx-border-width: 5px;
+}
+
+Slider {
+    -show-value-on-interaction: true;
+}
+Slider .thumb {
+    -fx-background-color: rgba(255,255,255,1);
+    -fx-background-insets: 0;
+    -fx-border-radius: 1em;
+
+    -fx-padding: 0.6em;
+
+    -fx-effect: null;
+}
+Slider .track {
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.2em;
+}
+Slider .axis { -fx-tick-label-fill: white; }
