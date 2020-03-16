@@ -37,8 +37,27 @@ public class Main {
         }
         String url = args[2];
         if(!url.endsWith("/")) url += "/";
-        updateFiles(repo, filesDir, url, "");
 
+        List<LauncherRepo.RepoFile> repoFiles = updateFiles(filesDir, url, "/", false);
+
+        LauncherRepo.RepoDirectory directory = new LauncherRepo.RepoDirectory();
+        if(repoFiles.size() > 0){
+            directory.setFiles(repoFiles.toArray(new LauncherRepo.RepoFile[0]));
+            directory.setClear(true);
+            repo.getDirectories().put("/", directory);
+        }
+
+        for (File f : Objects.requireNonNull(filesDir.listFiles())) {
+            if(f.isDirectory()){
+                repoFiles = updateFiles(f, url + f.getName() + "/", "/", true);
+                directory = new LauncherRepo.RepoDirectory();
+                if(repoFiles.size() > 0){
+                    directory.setFiles(repoFiles.toArray(new LauncherRepo.RepoFile[0]));
+                    directory.setClear(true);
+                    repo.getDirectories().put("/" + f.getName(), directory);
+                }
+            }
+        }
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(gson.toJson(repo));
@@ -49,26 +68,21 @@ public class Main {
         }
     }
 
-    private static void updateFiles(LauncherRepo repo, File filesDir, String url, String path) {
-        LauncherRepo.RepoDirectory directory = new LauncherRepo.RepoDirectory();
+    private static List<LauncherRepo.RepoFile> updateFiles(File filesDir, String url, String path, boolean recursive) {
         List<LauncherRepo.RepoFile> repoFileArrayList = new ArrayList<LauncherRepo.RepoFile>();
         for (File f : Objects.requireNonNull(filesDir.listFiles())) {
-            if(f.isDirectory()){
-                updateFiles(repo, f, url + f.getName() + "/", path + f.getName() + "/");
+            if(recursive && f.isDirectory()){
+                repoFileArrayList.addAll(updateFiles(f, url + f.getName() + "/", path + f.getName() + "/", recursive));
             }
             if(f.isFile()){
                 try {
-                    repoFileArrayList.add(new LauncherRepo.RepoFile(f.getName(), crc32(f), url + "/" + f.getName(), path + "/" + f.getName(), null));
+                    repoFileArrayList.add(new LauncherRepo.RepoFile(f.getName(), crc32(f), url + "/" + f.getName(), path + f.getName(), null));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        if(repoFileArrayList.size() > 0){
-            directory.setFiles(repoFileArrayList.toArray(new LauncherRepo.RepoFile[0]));
-            directory.setClear(true);
-            repo.getDirectories().put("/" + path, directory);
-        }
+        return repoFileArrayList;
     }
     public static String crc32(File file) throws IOException {
         InputStream in = new FileInputStream(file);
