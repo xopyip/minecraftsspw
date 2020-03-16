@@ -28,10 +28,13 @@ public class Main extends Application {
             DIR.mkdirs();
         }
         Parent parent = FXMLLoader.load(this.getClass().getResource("/launcher.fxml"));
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent, 800, 440);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Minecraft SSPW");
         primaryStage.show();
+        primaryStage.setWidth(800);
+        primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> System.exit(0));
     }
 }

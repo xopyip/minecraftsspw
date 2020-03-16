@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="container" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.mateuszbaluch.minecraftsspw.launcher.Controller">
+<AnchorPane fx:id="container" prefHeight="450.0" prefWidth="800.0" maxWidth="800" minWidth="800" maxHeight="450" minHeight="450" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.mateuszbaluch.minecraftsspw.launcher.Controller">
 
    <stylesheets>
       <URL value="@style.css" />
