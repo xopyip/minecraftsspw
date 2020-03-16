@@ -6,16 +6,15 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tech.mateuszbaluch.minecraftsspw.launcher.data.LauncherRepo;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
@@ -41,7 +40,7 @@ public class Controller implements Initializable {
     @FXML
     public ProgressBar progressbar;
     private LauncherRepo repo = null;
-    private static final Gson GSON = new Gson();
+    public static final Gson GSON = new Gson();
     public static Config CONFIG;
 
     @Override
@@ -57,7 +56,7 @@ public class Controller implements Initializable {
         ramSlider.setValue(CONFIG.getRam()/1024d);
 
         try {
-            repo = GSON.fromJson(Unirest.get("http://minecraft.sspw.pl/repo.json").asString().getBody(), LauncherRepo.class);
+            repo = GSON.fromJson(Unirest.get(Main.REPO_URL).asString().getBody(), LauncherRepo.class);
         } catch (UnirestException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,9 @@
 package tech.mateuszbaluch.minecraftsspw.launcher;
 
-enum OSType {
+public enum OSType {
     OSX, WINDOWS, LINUX;
+
+    public String getText() {
+        return this.name().toLowerCase();
+    }
 }
