@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 public class MinecraftDownloader {
@@ -93,7 +94,8 @@ public class MinecraftDownloader {
             if (!file1.exists()) {
                 file1.mkdirs();
             }
-            final List<String> strings = new ArrayList<>(Arrays.asList(file1.list()));
+            final List<String> strings = new ArrayList<>();
+            collectFiles(strings, file1, "/");
             for (LauncherRepo.RepoFile file : dir.getFiles()) {
                 if (file.getOptional() == null) {
                     strings.remove(file.getPath());
@@ -118,5 +120,15 @@ public class MinecraftDownloader {
         downloader.start();
         downloader.start();
 
+    }
+
+    private void collectFiles(List<String> strings, File file1, String s) {
+        for (File file : Objects.requireNonNull(file1.listFiles())) {
+            if(file.isDirectory()){
+                collectFiles(strings, file, s + file.getName() + "/");
+                continue;
+            }
+            strings.add(s + file.getName());
+        }
     }
 }
